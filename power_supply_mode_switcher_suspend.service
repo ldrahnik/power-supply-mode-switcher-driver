@@ -1,0 +1,10 @@
+[Unit]
+Description=Restart power supply settings switcher service after woke up from suspend
+After=suspend.target
+
+[Service]
+Type=simple
+ExecStart=systemctl --no-block restart power_supply_settings_switcher.service
+
+[Install]
+WantedBy=suspend.target

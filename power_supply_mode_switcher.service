@@ -1,0 +1,15 @@
+[Unit]
+Description=Handler of power supply change
+
+[Service]
+Type=simple
+ExecStart=/usr/share/power_supply_mode_switcher-driver/enable_battery_or_ac_mode.sh
+StandardInput=tty-force
+StandardOutput=append:/var/log/power_supply_mode_switcher-driver/error.log
+StandardError=append:/var/log/power_supply_mode_switcher-driver/error.log
+TimeoutSec=5
+Restart=on-failure
+ExecStartPre=/bin/sleep 2
+
+[Install]
+WantedBy=graphical.target

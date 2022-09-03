@@ -1,1 +1,1 @@
-# ac-battery-mode-driver
+# Power Supply Mode Switcher driver

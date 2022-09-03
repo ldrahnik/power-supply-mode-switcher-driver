@@ -11,9 +11,28 @@ cp power_supply_mode_switcher_suspend.service /etc/systemd/system/
 
 mkdir -p /var/log/power_supply_mode_switcher-driver
 mkdir -p /usr/share/power_supply_mode_switcher-driver/conf
-cp -r conf /usr/share/power_supply_mode_switcher-driver
-cp enable_battery_or_ac_mode.sh /usr/share/power_supply_mode_switcher-driver/
-chmod +x /usr/share/power_supply_mode_switcher-driver/enable_battery_or_ac_mode.sh
+#cp -r conf /usr/share/power_supply_mode_switcher-driver
+cp enable_bat_or_ac_mode.sh /usr/share/power_supply_mode_switcher-driver/
+chmod +x /usr/share/power_supply_mode_switcher-driver/enable_bat_or_ac_mode.sh
+
+AC_MODE_CONFIG_DIFF=$(diff <(grep -v '^#' conf/ac_mode.sh) <(grep -v '^#' /usr/share/power_supply_mode_switcher-driver/conf/ac_mode.sh))
+BAT_MODE_CONFIG_DIFF=$(diff <(grep -v '^#' conf/bat_mode.sh) <(grep -v '^#' /usr/share/power_supply_mode_switcher-driver/conf/bat_mode.sh))
+
+if [ "$AC_MODE_CONFIG_DIFF" != "" ] || [ "$BAT_MODE_CONFIG_DIFF" != "" ]
+then
+    read -r -p "Overwrite existing config scripts for each mode [y/N]" response
+    case "$response" in [yY][eE][sS]|[yY])
+        echo "Used default config files. Config may be edited here /usr/share/power_supply_mode_switcher-driver/conf"
+        cp -r conf /usr/share/power_supply_mode_switcher-driver    
+        ;;
+    *)
+        echo "Used last config files."
+        ;;
+    esac
+else
+    echo "Used default config files. Config may be edited here /usr/share/power_supply_mode_switcher-driver/conf"
+    cp -r conf /usr/share/power_supply_mode_switcher-driver
+fi
 
 echo "Installing udev rules to /usr/lib/udev/rules.d/"
 

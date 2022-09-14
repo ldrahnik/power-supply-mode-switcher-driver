@@ -11,7 +11,6 @@ cp power_supply_mode_switcher_suspend.service /etc/systemd/system/
 
 mkdir -p /var/log/power_supply_mode_switcher-driver
 mkdir -p /usr/share/power_supply_mode_switcher-driver/conf
-#cp -r conf /usr/share/power_supply_mode_switcher-driver
 cp enable_bat_or_ac_mode.sh /usr/share/power_supply_mode_switcher-driver/
 chmod +x /usr/share/power_supply_mode_switcher-driver/enable_bat_or_ac_mode.sh
 

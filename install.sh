@@ -14,8 +14,18 @@ mkdir -p /usr/share/power_supply_mode_switcher-driver/conf
 cp enable_bat_or_ac_mode.sh /usr/share/power_supply_mode_switcher-driver/
 chmod +x /usr/share/power_supply_mode_switcher-driver/enable_bat_or_ac_mode.sh
 
-AC_MODE_CONFIG_DIFF=$(diff <(grep -v '^#' conf/ac_mode.sh) <(grep -v '^#' /usr/share/power_supply_mode_switcher-driver/conf/ac_mode.sh))
-BAT_MODE_CONFIG_DIFF=$(diff <(grep -v '^#' conf/bat_mode.sh) <(grep -v '^#' /usr/share/power_supply_mode_switcher-driver/conf/bat_mode.sh))
+AC_MODE_FILE='/usr/share/power_supply_mode_switcher-driver/conf/ac_mode.sh'
+BAT_MODE_FILE='/usr/share/power_supply_mode_switcher-driver/conf/bat_mode.sh'
+
+AC_MODE_CONFIG_DIFF=""
+if test -f "$AC_MODE_FILE"; then
+    AC_MODE_CONFIG_DIFF=$(diff <(grep -v '^#' conf/ac_mode.sh) <(grep -v '^#' $AC_MODE_FILE))
+fi
+
+BAT_MODE_CONFIG_DIFF=""
+if test -f "$BAT_MODE_FILE"; then
+    BAT_MODE_CONFIG_DIFF=$(diff <(grep -v '^#' conf/bat_mode.sh) <(grep -v '^#' $BAT_MODE_FILE))
+fi
 
 if [ "$AC_MODE_CONFIG_DIFF" != "" ] || [ "$BAT_MODE_CONFIG_DIFF" != "" ]
 then

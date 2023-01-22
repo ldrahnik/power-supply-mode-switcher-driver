@@ -13,10 +13,10 @@ then
 	exit 1
 fi
 
-systemctl stop power_supply_mode_switcher_restart
+systemctl stop power_supply_mode_switcher_suspend
 if [[ $? != 0 ]]
 then
-	echo "power_supply_mode_switcher_restart.service cannot be stopped correctly..."
+	echo "power_supply_mode_switcher_suspend.service cannot be stopped correctly..."
 	exit 1
 fi
 
@@ -27,10 +27,10 @@ then
 	exit 1
 fi
 
-systemctl disable power_supply_mode_switcher_restart
+systemctl disable power_supply_mode_switcher_suspend
 if [[ $? != 0 ]]
 then
-	echo "power_supply_mode_switcher_restart.service cannot be disabled correctly..."
+	echo "power_supply_mode_switcher_suspend.service cannot be disabled correctly..."
 	exit 1
 fi
 
@@ -41,10 +41,10 @@ then
 	exit 1
 fi
 
-rm -f /lib/systemd/system/power_supply_mode_switcher_restart.service
+rm -f /lib/systemd/system/power_supply_mode_switcher_suspend.service
 if [[ $? != 0 ]]
 then
-	echo "/lib/systemd/system/power_supply_mode_switcher_restart.service cannot be removed correctly..."
+	echo "/lib/systemd/system/power_supply_mode_switcher_suspend.service cannot be removed correctly..."
 	exit 1
 fi
 

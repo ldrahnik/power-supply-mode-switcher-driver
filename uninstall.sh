@@ -62,5 +62,12 @@ then
 	exit 1
 fi
 
+rm -f /usr/lib/udev/rules.d/80-power-supply-mode-switcher.rules
+if [[ $? != 0 ]]
+then
+	echo "/usr/lib/udev/rules.d/80-power-supply-mode-switcher.rules cannot be removed correctly..."
+	exit 1
+fi
+
 echo "Power supply mode switcher driver uninstalled"
 exit 0

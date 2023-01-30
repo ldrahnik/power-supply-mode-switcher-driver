@@ -47,7 +47,7 @@ echo "Installing udev rules to /usr/lib/udev/rules.d/"
 cp udev/80-power-supply-mode-switcher.rules /usr/lib/udev/rules.d/
 echo "Added 80-power-supply-mode-switcher.rules"
 
-sudo udevadm control --reload-rules
+udevadm control --reload-rules
 echo "Reloaded udev rules"
 
 systemctl enable power_supply_mode_switcher

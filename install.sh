@@ -31,7 +31,7 @@ then
     read -r -p "Overwrite existing config scripts for each mode [y/N]" response
     case "$response" in [yY][eE][sS]|[yY])
         echo "Used default config files. Config may be edited here /usr/share/power_supply_mode_switcher-driver/conf"
-        cp -r conf /usr/share/power_supply_mode_switcher-driver    
+        cp -r conf /usr/share/power_supply_mode_switcher-driver  
         ;;
     *)
         echo "Used last config files."
@@ -41,6 +41,9 @@ else
     echo "Used default config files. Config may be edited here /usr/share/power_supply_mode_switcher-driver/conf"
     cp -r conf /usr/share/power_supply_mode_switcher-driver
 fi
+
+chmod +x /usr/share/power_supply_mode_switcher-driver/conf/ac_mode.sh
+chmod +x /usr/share/power_supply_mode_switcher-driver/conf/bat_mode.sh
 
 echo "Installing udev rules to /usr/lib/udev/rules.d/"
 

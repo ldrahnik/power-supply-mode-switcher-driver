@@ -1,2 +1,2 @@
-SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="0", RUN+="/home/ldrahnik/projects/elementary-os-scripts/bat_mode.sh"
-SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="1", RUN+="/home/ldrahnik/projects/elementary-os-scripts/ac_mode.sh"
+SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="0", RUN+="/usr/share/power_supply_mode_switcher-driver/conf/bat_mode.sh"
+SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="1", RUN+="/usr/share/power_supply_mode_switcher-driver/conf/ac_mode.sh"

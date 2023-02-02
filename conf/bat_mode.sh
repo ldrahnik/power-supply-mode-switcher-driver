@@ -9,5 +9,5 @@ echo "92" | tee $FILE
 CURRENT_KEYBOARD_BACKLIGHT="$(cat /sys/class/leds/asus::kbd_backlight/brightness)"
 if [[ "$CURRENT_KEYBOARD_BACKLIGHT" > 1 ]]; 
 then
-    echo 1 | tee /sys/class/leds/asus::kbd_backlight/brightness
+    echo "1" | tee /sys/class/leds/asus::kbd_backlight/brightness
 fi

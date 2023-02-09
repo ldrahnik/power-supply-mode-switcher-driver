@@ -70,4 +70,14 @@ else
     echo "Power supply mode switcher driver service started"
 fi
 
+read -r -p "Is required reboot. Reboot now? [y/N]" response
+case "$response" in [yY][eE][sS]|[yY])
+    reboot
+    ;;
+*)
+    ;;
+esac
+
+echo "Install finished"
+
 exit 0

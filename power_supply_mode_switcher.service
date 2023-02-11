@@ -1,5 +1,5 @@
 [Unit]
-Description=Handler of power supply change
+Description=Handler of power supply additional configuration change
 
 [Service]
 Type=simple

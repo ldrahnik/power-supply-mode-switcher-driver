@@ -10,8 +10,7 @@ cp power_supply_mode_switcher.service /etc/systemd/system/
 
 mkdir -p /var/log/power_supply_mode_switcher-driver
 mkdir -p /usr/share/power_supply_mode_switcher-driver/conf
-cp enable_bat_or_ac_mode.sh /usr/share/power_supply_mode_switcher-driver/
-chmod +x /usr/share/power_supply_mode_switcher-driver/enable_bat_or_ac_mode.sh
+install enable_bat_or_ac_mode.sh /usr/share/power_supply_mode_switcher-driver/
 
 AC_MODE_FILE='/usr/share/power_supply_mode_switcher-driver/conf/ac_mode.sh'
 BAT_MODE_FILE='/usr/share/power_supply_mode_switcher-driver/conf/bat_mode.sh'

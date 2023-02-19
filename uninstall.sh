@@ -52,7 +52,8 @@ then
 		fi
         ;;
     *)
-		rm -rf "/usr/share/power_supply_mode_switcher-driver/!(conf)\""
+		shopt -s extglob
+		rm -rf /usr/share/power_supply_mode_switcher-driver/!(conf)
 		if [[ $? != 0 ]]
 		then
 			echo "/usr/share/power_supply_mode_switcher-driver/ cannot be removed correctly..."

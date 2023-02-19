@@ -27,11 +27,49 @@ then
 	exit 1
 fi
 
-rm -rf /usr/share/power_supply_mode_switcher-driver/
-if [[ $? != 0 ]]
+AC_MODE_FILE="/usr/share/power_supply_mode_switcher-driver/conf/ac_mode.sh"
+BAT_MODE_FILE="/usr/share/power_supply_mode_switcher-driver/conf/bat_mode.sh"
+
+AC_MODE_CONFIG_DIFF=""
+if test -f "$AC_MODE_FILE"; then
+    AC_MODE_CONFIG_DIFF=$(diff <(grep -v '^#' conf/ac_mode.sh) <(grep -v '^#' $AC_MODE_FILE))
+fi
+
+BAT_MODE_CONFIG_DIFF=""
+if test -f "$BAT_MODE_FILE"; then
+    BAT_MODE_CONFIG_DIFF=$(diff <(grep -v '^#' conf/bat_mode.sh) <(grep -v '^#' $BAT_MODE_FILE))
+fi
+
+if [ "$AC_MODE_CONFIG_DIFF" != "" ] || [ "$BAT_MODE_CONFIG_DIFF" != "" ]
 then
-	echo "/usr/share/power_supply_mode_switcher-driver/ cannot be removed correctly..."
-	exit 1
+    read -r -p "Installed config scripts contain modifications compared to the default ones. Do you want remove them for each mode [y/N]" response
+    case "$response" in [yY][eE][sS]|[yY])
+		rm -rf /usr/share/power_supply_mode_switcher-driver/
+		if [[ $? != 0 ]]
+		then
+			echo "/usr/share/power_supply_mode_switcher-driver/ cannot be removed correctly..."
+			exit 1
+		fi
+        ;;
+    *)
+		shopt -s extglob
+		rm -rf /usr/share/power_supply_mode_switcher-driver/!(conf)
+		if [[ $? != 0 ]]
+		then
+			echo "/usr/share/power_supply_mode_switcher-driver/ cannot be removed correctly..."
+			exit 1
+		fi
+		echo "Config scripts in /usr/share/power_supply_mode_switcher-driver/conf/* have not been removed and remain in system:"
+        ls /usr/share/power_supply_mode_switcher-driver/conf
+        ;;
+    esac
+else
+	rm -rf /usr/share/power_supply_mode_switcher-driver/
+	if [[ $? != 0 ]]
+	then
+		echo "/usr/share/power_supply_mode_switcher-driver/ cannot be removed correctly..."
+		exit 1
+	fi
 fi
 
 rm -rf /var/log/power_supply_mode_switcher-driver

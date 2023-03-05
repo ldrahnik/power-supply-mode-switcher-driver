@@ -11,3 +11,7 @@ if [[ "$CURRENT_KEYBOARD_BACKLIGHT" > 1 ]];
 then
     echo "1" | tee /sys/class/leds/asus::kbd_backlight/brightness
 fi
+
+# intel_pstate
+FILE="/sys/devices/system/cpu/intel_pstate"
+echo "1" | tee $FILE/no_turbo

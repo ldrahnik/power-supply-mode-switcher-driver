@@ -6,6 +6,9 @@ then
 	exit 1
 fi
 
+# for `rm` exclude !(xy)
+shopt -s extglob
+
 systemctl stop power_supply_mode_switcher
 if [[ $? != 0 ]]
 then
@@ -52,8 +55,7 @@ then
 		fi
         ;;
     *)
-		shopt -s extglob
-		rm -rf /usr/share/power_supply_mode_switcher-driver/!(conf)
+		rm -rf "/usr/share/power_supply_mode_switcher-driver/"!(conf)
 		if [[ $? != 0 ]]
 		then
 			echo "/usr/share/power_supply_mode_switcher-driver/ cannot be removed correctly..."

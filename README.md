@@ -15,7 +15,7 @@ sudo bash ./install.sh
 ## Uninstallation
 
 ```bash
-sudo ./uninstall.sh
+sudo bash ./uninstall.sh
 ```
 
 ## Customization
